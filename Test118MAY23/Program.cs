@@ -170,8 +170,7 @@ internal class Program
             Console.WriteLine("Time record did not deleded successfully");
 
         }
-        // Finish
-        // Second test
+        
 
        
 
