@@ -121,7 +121,8 @@ internal class Program
         // Clear Price text box and change price per unit "5000000"
         //IWebElement pricetextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
         //pricetextBox.Clear();
-        //pricetextBox.SendKeys("100");
+        //pricetextbox.SendKeys(Keys.Backspace);
+        //pricetextBox.SendKeys("5000000");
 
         // Save Changers
 
