@@ -168,7 +168,9 @@ internal class Program
         else
         {
             Console.WriteLine("Time record did not deleded successfully");
+
         }
+        // Finish
 
        
 
