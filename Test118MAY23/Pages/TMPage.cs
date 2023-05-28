@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -9,92 +10,80 @@ using Test118MAY23.Utilities;
 
 namespace Test118MAY23.Pages
 {
-    public class TMPage 
+    public class TMPage : commonDriver 
     {
+        private static IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+        private static IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
+        private static IWebElement timeOption = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
+        private static IWebElement codeTextBox = driver.FindElement(By.Id("Code"));
+        private static IWebElement descriptionTextBox = driver.FindElement(By.Id("Description"));
+        private static IWebElement pricetextBox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+        private static IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
+        private static IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+        private static IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+        private static IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+
+        
+        private static IWebElement editPriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+        private static IWebElement editPrice = driver.FindElement(By.Id("Price"));
+
+
+
+
+
         public void CreateTM(IWebDriver driver)
         {
-            // Click on create new buttton
-            IWebElement createnewbutton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
-            createnewbutton.Click();
-
-            // Select time from dropdown list
-            IWebElement typecodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
-            typecodeDropdown.Click();
-
-            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
-            timeOption.Click();
-
-            // Input code
-            IWebElement codetextBox = driver.FindElement(By.Id("Code"));
-            codetextBox.SendKeys("19MAY23");
-
-            // Input description
-            IWebElement descriptiontextBox = driver.FindElement(By.Id("Description"));
-            descriptiontextBox.SendKeys("2023");
-
-            // Input price per unit 
-            IWebElement pricetextBox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            pricetextBox.SendKeys("25000");
-
-            // Click on save button   
-            IWebElement saveButtton = driver.FindElement(By.Id("SaveButton"));
-            saveButtton.Click();
+           
+            createNewButton.Click();
+            typeCodeDropdown.Click();
+            timeOption.Click();     
+            codeTextBox.SendKeys("19MAY23");  
+            descriptionTextBox.SendKeys("2023");      
+            pricetextBox.SendKeys("25000");   
+            saveButton.Click();
             Thread.Sleep(2000);
 
-            // Check if new time record has been created successfully
+            
 
             // Navigate to the last page
             Wait.WaitTobeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 10);
+            goToLastPageButton.Click();
 
-            IWebElement gotolastpageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            gotolastpageButton.Click();
+            // 1 Method of Assertion 
 
-            // Check if record is precent in the table
-            IWebElement newcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            //if (newCode.Text == "19MAY23")
+            //{
+            //    Assert.Pass("Time recorded created succesfully.");
+            //}
+            //else
+            //{
+            //    Assert.Pass("Time record has not been created successfully.");
+            //}
 
-            if (newcode.Text == "19MAY23")
-            {
-                Console.WriteLine("Time recorded created succesfully.");
-            }
-            else
-            {
-                Console.WriteLine("Time record has not created successfully.");
-            }
+            // 2 Method of Assertion
+
+            Assert.That(newCode.Text == "22MAY24", "Time record has not been created successfully.");
 
         }
         public void EditTM(IWebDriver driver)
         {
-            // Click edit button on last raw
-            IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+          
             editButton.Click();
+            Thread.Sleep(2000); 
+            codeTextBox.Clear();
+            codeTextBox.SendKeys("22MAY24");
             Thread.Sleep(2000);
-
-            // Clear Code textbox and Change Text Box
-            IWebElement codetextbox = driver.FindElement(By.Id("Code"));
-            codetextbox.Clear();
-            codetextbox.SendKeys("22MAY24");
-            Thread.Sleep(2000);
-
-
-            // Clear Descreption and change description "2024"
-            IWebElement descriptiontextbox = driver.FindElement(By.Id("Description"));
-            descriptiontextbox.Clear();
-            descriptiontextbox.SendKeys("2024");
+            descriptionTextBox.Clear();
+            descriptionTextBox.SendKeys("2024");
             Thread.Sleep(2000);
 
 
-            // Clear Price text box and change price per unit "5000000"
-            IWebElement editpriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            IWebElement editprice = driver.FindElement(By.Id("Price"));
-            editpriceOverlap.Clear();
-            editprice.Clear();
-            editpriceOverlap.SendKeys("5000000");
+      
+            editPriceOverlap.Clear();
+            editPrice.Clear();
+            editPriceOverlap.SendKeys("5000000");
             Thread.Sleep(3000);
-
-            // Save Changers
-
-            IWebElement savebutton = driver.FindElement(By.Id("SaveButton"));
-            savebutton.Click();
+            saveButton.Click();
             Thread.Sleep(2000);
 
             // Check if saved information has been created successfully
@@ -142,8 +131,10 @@ namespace Test118MAY23.Pages
 
             }
         }
-         
-        
-       
+
+        internal void CreateTime(IWebDriver driver)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
