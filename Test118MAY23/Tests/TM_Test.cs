@@ -30,28 +30,30 @@ namespace Test118MAY23.Tests
 
         }
 
-        [Test]
+        [Test, Order (1)]
         public void CreatTime_Test()
         {
             // TM page object initialization and definition
             TMPage tMPageobj = new TMPage();
-            tMPageobj.CreateTM(driver);
+            tMPageobj.CreateTMP(driver);
         }
 
-        [Test]
+        [Test, Order (2)]
         public void EditTime_Test()
         {
-            // Edit time record
+            // TM page object initialization and definition
             TMPage tMPageobj = new TMPage();
+            // Edit time record
             tMPageobj.EditTM(driver);
 
         }
 
-        [Test]
+        [Test, Order (3)]
         public void DeleteTime_Test()
         {
-            // Delete time record
+            // TM page object initialization and definition
             TMPage tMPageobj = new TMPage();
+            // Delete time record
             tMPageobj.DeleteTM(driver);
         }
 
