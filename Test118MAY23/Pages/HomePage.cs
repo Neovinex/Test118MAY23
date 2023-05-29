@@ -23,5 +23,18 @@ namespace Test118MAY23.Pages
             tmOption.Click();
 
         }
+        public void GoToEmployeePage(IWebDriver driver)
+        {
+            // Navigate to employees page
+            IWebElement adminisstrationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a/span"));
+            adminisstrationTab.Click();
+
+            Wait.WaitTobeClickable(driver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a", 6);
+
+            IWebElement employeesOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a"));
+            employeesOption.Click();
+
+        }
+
     }
 }
