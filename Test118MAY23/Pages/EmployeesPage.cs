@@ -61,10 +61,9 @@ namespace Test118MAY23.Pages
             Thread.Sleep(2000);
 
             //Go to last page
-            Wait.WaitTobeClickable(driver, "XPath", "//*[@id=\"usersGrid\"]/div[4]/a[4]/span", 10);
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[4]/a[4]/span"));
             lastPageButton.Click();
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
             //Find New Employee Profile on last Page
             IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
