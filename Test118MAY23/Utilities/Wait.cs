@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Test118MAY23.Utilities
 {
-    public class Wait
+    public class Wait 
     {
 
         public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
@@ -49,7 +49,10 @@ namespace Test118MAY23.Utilities
 
         }
 
-
+        internal static void WaitTobeClickable(IWebDriver driver, string v1, string v2, int v3)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
