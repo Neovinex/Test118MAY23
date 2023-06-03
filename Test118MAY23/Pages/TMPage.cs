@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace Test118MAY23.Pages
             lastPageButton.Click();
             Thread.Sleep(2000);
 
-            
+
 
             // Find the last record on the list page
             //IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
@@ -54,8 +55,32 @@ namespace Test118MAY23.Pages
             //Assert.That(newDescription.Text == "2023", "Actual New description and expected description donot match");
             //Assert.That(newPrice.Text == "$25,000.00", "Actual New Price and expected price donot match");
 
-        }   
-        public void EditTM(IWebDriver driver)
+        }
+
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return newCode.Text;
+
+            
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
+
+        
+       
+
+        public void EditTM(IWebDriver driver, string description)
         {
             Thread.Sleep(3000);
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
@@ -85,7 +110,7 @@ namespace Test118MAY23.Pages
 
             IWebElement descriptionTextBox = driver.FindElement(By.Id("Description"));
             descriptionTextBox.Clear();
-            descriptionTextBox.SendKeys("2024");
+            descriptionTextBox.SendKeys(description);
             Thread.Sleep(2000);
 
             IWebElement editPriceOverLap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
@@ -102,7 +127,17 @@ namespace Test118MAY23.Pages
             saveButton.Click();
             Thread.Sleep(1000);
 
+            IWebElement goToEditLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            goToEditLastPageButton.Click();
+            Thread.Sleep(1500);
+
         }
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement createDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return createDescription.Text;
+        }   
+
         public void DeleteTM(IWebDriver driver)
         {
             // Click Delete button on last raw

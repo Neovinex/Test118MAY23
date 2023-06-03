@@ -11,21 +11,27 @@ using Test118MAY23.Utilities;
 namespace Test118MAY23.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class TM_Tests : CommonDriver
     {
+        //private object homePageObj  
+        HomePage homePageObj = new HomePage();
+        TMPage tMPageObj = new TMPage();
+        //private object tmPageObj;
+        
         [SetUp]
         public void SetUpAction()
         {
-            // Open Chrome Browser
-            driver = new ChromeDriver();
+            //// Open Chrome Browser
+            //driver = new ChromeDriver();
 
-            // Login page object initialization and definition
-            LoginPage loginPageobj = new LoginPage();
-            loginPageobj.LoginSteps(driver);
+            //// Login page object initialization and definition
+            //LoginPage loginPageobj = new LoginPage();
+            //loginPageobj.LoginSteps(driver);
 
-            // Home page object initialization and definition
-            HomePage homePageobj = new HomePage();
-            homePageobj.GoToTMPage(driver);
+            //// Home page object initialization and definition
+            //HomePage homePageobj = new HomePage();
+            //homePageobj.GoToTMPage(driver);
 
         }
 
@@ -41,27 +47,29 @@ namespace Test118MAY23.Tests
         public void EditTime_Test()
         {
             // TM page object initialization and definition
-            TMPage tMPageobj = new TMPage();
+            //TMPage tMPageobj = new TMPage();
+            homePageObj.GoToTMPage(driver);
             // Edit time record
-            tMPageobj.EditTM(driver);
+            //tMPageobj.EditTM(driver);
+            
+            
 
         }
 
         [Test, Order(3)]
         public void DeleteTime_Test()
         {
+            homePageObj.GoToTMPage(driver);
+
             // TM page object initialization and definition
-            TMPage tMPageobj = new TMPage();
+            //TMPage tMPageobj = new TMPage();
             // Delete time record
-            tMPageobj.DeleteTM(driver);
+            //tMPageobj.DeleteTM(driver);
+            tMPageObj.DeleteTM(driver);
+
         }
 
-        [TearDown]
-        public void CloseTestRun()
-        {
-            driver.Quit();
-        }
-
+        
 
 
 

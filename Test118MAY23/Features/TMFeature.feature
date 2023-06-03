@@ -11,6 +11,20 @@ Scenario: Create Time and Material record with valid details
 	Then The record should be created successfully
 
 
+Scenario Outline: Edit existing time and material record with valid details
+	Given I logged into TurnUp portal successfully
+	When I navigate Time and Material record
+	And I update "<Description>" on an existing Time and Material record
+	Then The record should be updated "<Description>"
+
+Examples: 
+| Description	|
+| Time			| 
+| Material		|
+| EditedRecord	|
+
+
+
 
 
 
