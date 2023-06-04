@@ -66,15 +66,29 @@ namespace Test118MAY23.Pages
             Thread.Sleep(1000);
 
             //Find New Employee Profile on last Page
-            IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            IWebElement username = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[2]"));
+            //IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            //IWebElement username = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[2]"));
             
 
-            Assert.That(name.Text == "Smith N", "Actual name and expected name match");
-            Assert.That(username.Text == "123ABC", "Actual username and expected username  match");
+            //Assert.That(name.Text == "Smith N", "Actual name and expected name match");
+            //Assert.That(username.Text == "123ABC", "Actual username and expected username  match");
 
 
         }
+        public string GetName(IWebDriver driver)
+        {
+            IWebElement Name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return Name.Text;
+
+        }
+
+        public string GetUserName(IWebDriver driver)
+        {
+            IWebElement UserName = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[2]"));
+            return UserName.Text;
+        }
+
+
         public void EditEmployee(IWebDriver driver)
         {   
             //Locate New Employee Profile from last raw
