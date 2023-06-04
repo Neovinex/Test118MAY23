@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,7 +81,7 @@ namespace Test118MAY23.Pages
         
        
 
-        public void EditTM(IWebDriver driver, string description)
+        public void EditTM(IWebDriver driver, string description, string code, string price)
         {
             Thread.Sleep(3000);
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
@@ -106,7 +107,7 @@ namespace Test118MAY23.Pages
 
             IWebElement codeTextBox = driver.FindElement(By.Id("Code"));
             codeTextBox.Clear();
-            codeTextBox.SendKeys("22MAY24");
+            codeTextBox.SendKeys(code);
 
             IWebElement descriptionTextBox = driver.FindElement(By.Id("Description"));
             descriptionTextBox.Clear();
@@ -119,7 +120,7 @@ namespace Test118MAY23.Pages
             IWebElement editPricetextBox = driver.FindElement(By.Id("Price"));
             editPricetextBox.Clear();
             Thread.Sleep(1000);
-            editPriceOverLap.SendKeys("5000000");
+            editPriceOverLap.SendKeys(price);
             Thread.Sleep(2000);
             
 
@@ -136,7 +137,19 @@ namespace Test118MAY23.Pages
         {
             IWebElement createDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
             return createDescription.Text;
-        }   
+        } 
+        
+        public string GetEditCode(IWebDriver driver)
+        {
+            IWebElement createdCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return createdCode.Text;
+        }
+        public string GetEditPrice(IWebElement driver)
+        {
+            IWebElement CreatedPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return CreatedPrice.Text;
+        }
+
 
         public void DeleteTM(IWebDriver driver)
         {
@@ -157,9 +170,14 @@ namespace Test118MAY23.Pages
             Assert.That(editedcode.Text != "22MAY24", "Record hasn't been deleted.");
         }
 
+        internal string GetEditedCode(IWebDriver driver)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-
+        internal string GetEditedPrice(IWebDriver driver)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Test118MAY23.StepDefinitions
     [Binding]
     public class TMFeatureStepDefinitions : CommonDriver
     {
-        private object tMPageobj;
+    
 
         [Given(@"I logged into TurnUp portal successfully")]
         public void GivenILoggedIntoTurnUpPortalSuccessfully()
@@ -47,26 +47,41 @@ namespace Test118MAY23.StepDefinitions
             string newDescription = tMPageObj.GetDescription(driver);
             string newPrice = tMPageObj.GetPrice(driver);
 
-            Assert.AreEqual("19MAY23",newCode, "Actual code and expected code donot match");
-            Assert.AreEqual("2023",newDescription, "Actual New description and expected description donot match");
-            Assert.AreEqual("$25,000.00",newPrice, "Actual New Price and expected price donot match");
+            Assert.AreEqual("19MAY23", newCode, "Actual code and expected code donot match");
+            Assert.AreEqual("2023", newDescription, "Actual New description and expected description donot match");
+            Assert.AreEqual("$25,000.00", newPrice, "Actual New Price and expected price donot match");
 
         }
 
-        [When(@"I update ""([^""]*)"" on an existing Time and Material record")]
-        public void WhenIUpdateOnAnExistingTimeAndMaterialRecord(string description)
+
+
+        [When(@"I update '([^']*)', '([^']*)' and '([^']*)' on an existing Time and Material record")]
+        public void WhenIUpdateAndOnAnExistingTimeAndMaterialRecord(string description, string code, string price)
         {
             TMPage tMPageObj = new TMPage();
-            tMPageObj.EditTM(driver, description);
+            tMPageObj.EditTM(driver, description, code, price);
+
         }
 
-        [Then(@"The record should be updated ""([^""]*)""")]
-        public void ThenTheRecordShouldBeUpdated(string description)
+        [Then(@"The record should be updated '([^']*)', '([^']*)' and '([^']*)'")]
+        public void ThenTheRecordShouldBeUpdatedAnd(string description, string code, string price)
         {
             TMPage tMPageObj = new TMPage();
-            string editedDescription = tMPageObj.GetDescription(driver);
-            Assert.AreEqual(description, editedDescription, "Actual edited description and expected edit description donot match");
+
+            string editedDescription = tMPageObj.GetEditedDescription(driver);
+            string editedCode = tMPageObj.GetEditedCode(driver);
+            string editedPrice = tMPageObj.GetEditedPrice(driver);
+
+            Assert.AreEqual(description, editedDescription, "Actual edited descreption and expected edited description donot match");
+            Assert.AreEqual(code, editedCode, "Actual edited code and expected edited code donot match");
+            Assert.AreEqual(price,editedPrice, "Actual edited price and expected edited price donot match");
+
+
+
         }
+
+
+
 
 
     }
