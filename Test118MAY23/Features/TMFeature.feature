@@ -18,10 +18,10 @@ Scenario Outline: Edit existing time and material record with valid details
 	Then The record should be updated '<Description>', '<Code>' and '<Price>'
 
 Examples: 
-| Description  | Code  | Price |
-| Time         | Smith | 50    |
-| Material     | Star  | 100   |
-| EditedRecord | NZ    | 200   |
+| Description  | Code  | Price		|
+| Time         | Smith | $50.00		|
+| Material     | Star  | $100.00	|
+| EditedRecord | NZ    | $2,000.00  |
 
 
 
