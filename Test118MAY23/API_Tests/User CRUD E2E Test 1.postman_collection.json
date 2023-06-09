@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "4a7e765f-c283-42fd-a6c9-b16dcf2f09fc",
+		"name": "User CRUD E2E Test 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27826522"
+	},
+	"item": [
+		{
+			"name": "Create a new user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Assertion 1 - status code check\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Assertion 2 - Responce Value Check\r",
+							"pm.test(\"Key value pair check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Donald  Trump\");\r",
+							"    pm.expect(jsonData.job).to.eql(\"Vice President\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"donaldt@gmail.com\");\r",
+							"\r",
+							"\r",
+							"    pm.environment.set(\"UserID\",jsonData.id);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"name\" : \"Donald  Trump\",\r\n    \"job\"   : \"Vice President\",\r\n    \"email\" : \"donaldt@gmail.com\",\r\n    \"avatar\" : \"https://donald.co.us\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an existing user record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Key Value Check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Donald J Trump\");\r",
+							"    pm.expect(jsonData.job).to.eql(\"President\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"donaldt@gmail.com\");\r",
+							"    pm.expect(jsonData.avatar).to.eql(\"https://donald.co.us\");\r",
+							"    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"name\" : \"Donald J Trump\",\r\n    \"job\"   : \"President\",\r\n    \"email\" : \"donaldt@gmail.com\",\r\n    \"avatar\" : \"https://donald.co.us\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{UserID}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{UserID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete  an existing user record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{UserID}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{UserID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

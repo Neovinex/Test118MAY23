@@ -1,24 +1,28 @@
 {
 	"info": {
-		"_postman_id": "0c66169b-be58-49e8-9de1-10e76a1a13b8",
-		"name": "Dummy API 1",
+		"_postman_id": "badd2234-6ecd-47bd-b00b-03f1e1a85d96",
+		"name": "Dummy API 2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27826522"
 	},
 	"item": [
 		{
-			"name": "Get all user data",
+			"name": "Get employees information",
 			"request": {
 				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Get a single user data",
-			"request": {
-				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/employees",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"employees"
+					]
+				}
 			},
 			"response": []
 		},
@@ -27,16 +31,50 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Smith\",\"salary\":\"200\",\"age\":\"23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
 				"url": {
-					"raw": "https://reqres.in/api/users",
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
 					"protocol": "https",
 					"host": [
-						"reqres",
-						"in"
+						"dummy",
+						"restapiexample",
+						"com"
 					],
 					"path": [
 						"api",
-						"users"
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get created user data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/6221",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"6221"
 					]
 				}
 			},
@@ -49,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Neo Smith\",\r\n    \"job\"  : \"Automation Tester\"\r\n}\r\n",
+					"raw": "{\r\n    \"name\":\"Smith Jason\",\"salary\":\"500\",\"age\":\"23\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,37 +95,41 @@
 					}
 				},
 				"url": {
-					"raw": "https://reqres.in/api/users/78",
+					"raw": "https://dummy.restapiexample.com/api/v1/update/6221",
 					"protocol": "https",
 					"host": [
-						"reqres",
-						"in"
+						"dummy",
+						"restapiexample",
+						"com"
 					],
 					"path": [
 						"api",
-						"users",
-						"78"
+						"v1",
+						"update",
+						"6221"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete  an existing user record",
+			"name": "Delete an existing user record",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://reqres.in/api/users/73",
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/6221",
 					"protocol": "https",
 					"host": [
-						"reqres",
-						"in"
+						"dummy",
+						"restapiexample",
+						"com"
 					],
 					"path": [
 						"api",
-						"users",
-						"73"
+						"v1",
+						"delete",
+						"6221"
 					]
 				}
 			},
