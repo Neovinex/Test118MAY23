@@ -1,93 +1,54 @@
 {
 	"info": {
-		"_postman_id": "badd2234-6ecd-47bd-b00b-03f1e1a85d96",
-		"name": "Dummy API 2",
+		"_postman_id": "0c66169b-be58-49e8-9de1-10e76a1a13b8",
+		"name": "Dummy API 1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27826522"
 	},
 	"item": [
 		{
-			"name": "Get employees information",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://dummy.restapiexample.com/employees",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"employees"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a new user",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Smith\",\"salary\":\"200\",\"age\":\"23\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "text"
-						}
+			"name": "Get all user data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"{\r",
+							"\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"First name check\", function () {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData.data[0].first_name).to.eql(\"George\");\r",
+							"        pm.expect(jsonData.data[1].first_name).to.eql(\"Janet\");\r",
+							"        pm.expect(jsonData.data[2].first_name).to.eql(\"Emma\");\r",
+							"        pm.expect(jsonData.data[3].first_name).to.eql(\"Eve\");\r",
+							"        pm.expect(jsonData.data[4].first_name).to.eql(\"Charles\");\r",
+							"        pm.expect(jsonData.data[5].first_name).to.eql(\"Tracey\");\r",
+							"        \r",
+							"        \r",
+							"        //pm.expect(jsonData[1].first_name).to.eql(2);\r",
+							"        \r",
+							"\r",
+							"\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
 					}
-				},
-				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/create",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"create"
-					]
 				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
 			},
-			"response": []
-		},
-		{
-			"name": "Get created user data",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/employee/6221",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"employee",
-						"6221"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update an existing user record",
-			"request": {
-				"method": "PUT",
-				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Smith Jason\",\"salary\":\"500\",\"age\":\"23\"\r\n}",
+					"raw": "{\r\n   \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,41 +56,73 @@
 					}
 				},
 				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/update/6221",
-					"protocol": "https",
+					"raw": "{{BaseUrl}}/api/users",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{BaseUrl}}"
 					],
 					"path": [
 						"api",
-						"v1",
-						"update",
-						"6221"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete an existing user record",
+			"name": "Get a single user data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"{\r",
+							"\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"    pm.test(\"Single User Check\", function () {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        \r",
+							"        //pm.expect(jsonData.data.first_name).to.eql(\"Charles\");\r",
+							"        //  OR\r",
+							"        pm.expect(jsonData.data.id).to.eql(5)\r",
+							"        \r",
+							"        \r",
+							"        \r",
+							"    });\r",
+							"    \r",
+							"    \r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/delete/6221",
-					"protocol": "https",
+					"raw": "{{BaseUrl}}/api/users/5",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{BaseUrl}}"
 					],
 					"path": [
 						"api",
-						"v1",
-						"delete",
-						"6221"
+						"users",
+						"5"
 					]
 				}
 			},

@@ -24,7 +24,16 @@
 							"  \r",
 							"});\r",
 							"\r",
-							"\r",
+							"pm.test(\"Id Check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].id).to.eql(1);\r",
+							"    pm.expect(jsonData.data[1].id).to.eql(2);\r",
+							"    pm.expect(jsonData.data[2].id).to.eql(3);\r",
+							"    pm.expect(jsonData.data[3].id).to.eql(4);\r",
+							"    pm.expect(jsonData.data[4].id).to.eql(5);\r",
+							"    pm.expect(jsonData.data[5].id).to.eql(6);\r",
+							"  \r",
+							"});\r",
 							"\r",
 							""
 						],
@@ -48,9 +57,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{BaseUrl}}/api/users",
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
 					"host": [
-						"{{BaseUrl}}"
+						"reqres",
+						"in"
 					],
 					"path": [
 						"api",
